@@ -50,7 +50,7 @@ export class UserDetailsComponent implements OnInit {
     this.listUsersService.updateUser(user)
     .subscribe((response) => {
       //DO SOMETHING, THEN ----
-      this.router.navigate(['/users-list']);
+      this.router.navigate(['/homePage/users-list']);
     }
     );
     

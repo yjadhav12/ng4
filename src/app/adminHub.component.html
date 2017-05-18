@@ -1,0 +1,78 @@
+
+<div class="container" class="row">
+  
+   
+   <nav class="navbar navbar-default">
+  <div class="container-fluid row">
+    
+    <div class="navbar-header col-xs-10">
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav col-xs-11">
+          <a class="navbar-brand col-xs-2" href="#">
+            <img src="./assets/images/messagehub.svg" style="width:120px">
+          </a>
+          
+            
+            <li class="col-xs-3">
+              
+            <a routerLink="/homePage" routerLinkActive="active" class="btn-switch-module-default" style="padding: 5px 18px;">
+              <span class="glyphicon glyphicon-menu-left glyphi-contents"> Home Page</span> 
+            </a>
+            </li>
+   
+               <!--<adminHub-root></adminHub-root>  -->
+               
+            
+            <li class="col-xs-1.5"><a routerLink="./users-list" routerLinkActive="active">User List</a></li>
+            <li class="col-xs-1.5"><a routerLink="./user-creation" routerLinkActive="active">Create User</a></li>
+            <li class="col-xs-3"><a routerLink="./user-logs" routerLinkActive="active">User Activity Log</a></li>
+        
+        </ul>
+         
+                
+            
+      </div>
+    </div>
+
+    <p class="navbar-btn col-xs-2">
+                    <a  routerLink="/logout" routerLinkActive="active" class="btn btn-default">Log Out</a>
+                </p>
+  </div>
+</nav>
+  <!--New Component with new sub Components
+  <div [ngSwitch]="tab">
+	<div *ngSwitchCase="1">I am Even.
+      <adminHub-root></adminHub-root>   
+  </div>
+	<div *ngSwitchCase="2" >I am Odd.
+     <msgHub-root></msgHub-root>
+  </div>
+	
+  </div> -->
+ <!--<div class="tabs-selection">
+      <app-tab [active]="isSelected(1)" (click)="setTab(1)">Tab 1</app-tab>
+      <app-tab [active]="isSelected(2)" (click)="setTab(2)">Tab 2</app-tab>
+      <app-tab [active]="isSelected(3)" (click)="setTab(3)">Tab 3</app-tab>
+    </div>
+    <div [ngSwitch]="tab">
+      <app-tab-content *ngSwitchCase="1">Tab content 1
+      </app-tab-content>
+      <app-tab-content *ngSwitchCase="2">Tab content 2
+      </app-tab-content>
+      <app-tab-content *ngSwitchCase="3"><app-tab-3></app-tab-3></app-tab-content>
+      <app-tab-content *ngSwitchDefault>Select a tab</app-tab-content>
+    </div>-->
+
+	<!--<a href="/welcome" class="btn btn-primary" >Home Page</a>
+	
+    <a href="/users-list" class="btn btn-primary">Users List</a>
+    <a href="/user-creation" class="btn btn-primary">Create New User</a>
+    <a href="/user-logs" class="btn btn-primary">Users Activity Logs</a>
+    <a href="/users/logout" class="btn btn-primary">Logout</a>-->
+
+      <!-- routing here -->
+  <router-outlet ></router-outlet>
+
+</div>
+
+

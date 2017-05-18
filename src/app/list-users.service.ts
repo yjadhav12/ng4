@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable, Subject } from 'rxjs/Rx';
+
 import { environment } from '../environments/environment';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -19,7 +20,54 @@ export class ListUsersService {
   constructor(private http: Http,
   private route: ActivatedRoute,
   private router: Router) { }
+  static moduleName;
+// Observable string sources
+    private missionAnnouncedSource = new Subject<boolean>();
+    private missionConfirmedSource = new Subject<boolean>();
 
+    // Observable string streams
+    missionAnnounced$ = this.missionAnnouncedSource.asObservable();
+    missionConfirmed$ = this.missionConfirmedSource.asObservable();
+
+    // Service message commands
+    announceMission(mission: string) {
+        console.log(mission);
+       //this.missionAnnouncedSource.next(mission);
+    }
+
+    confirmMission(astronaut: string) {
+        console.log(astronaut);
+        //this.missionConfirmedSource.next(astronaut);
+    }
+  isAdmin = false;
+  switchModule(){
+      this.isAdmin= !this.isAdmin;
+      this.missionConfirmedSource.next(this.isAdmin);
+      console.log("returning isAdmin "+ this.isAdmin);
+      return this.isAdmin;
+
+    // if(this.isAdmin){
+    //   this.isAdmin= false;
+    //   this.missionConfirmedSource.next(this.isAdmin);
+    //   console.log("returning admin "+ this.isAdmin);
+    //   return this.isAdmin;
+    //   //return "admin";
+    // }
+    // else{
+    //   this.isAdmin= true;
+    //   this.missionConfirmedSource.next(this.isAdmin);
+    //   console.log("returning user "+ this.isAdmin);
+    //   return this.isAdmin;
+    //   ///return "user";
+    // }
+    
+  }
+
+  
+  isAdminUser(){
+    ListUsersService.moduleName = !ListUsersService.moduleName;
+    return !ListUsersService.moduleName;
+}
   getAllUsers() {
     let url;
     url = `${this.searchUsersEndPoint}listAllUsers`;

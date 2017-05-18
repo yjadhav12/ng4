@@ -1,0 +1,135 @@
+
+
+<div class="container">
+  <div class="row row-bkg-grey">
+   <div class="col-xs-3">
+  </div>
+  <div class="col-xs-5">
+  <h2>Country</h2>
+  <div class="form-group">
+    <div class=""></div>
+        <div class="selectContainer">
+          <!--<md-select placeholder="Favorite food" [(ngModel)]="selectedValue" name="food">
+            <md-option *ngFor="let food of countries" [value]="food.countryName">
+              {{food.countryName}}
+            </md-option>
+          </md-select>
+
+          <md-select placeholder="Country"  [(ngModel)]="country" name="country">
+                <md-option *ngFor="let country of countries" [value]="country.countryId">{{ country.countryName }}</md-option>
+          </md-select>-->
+
+          <select (ngModelChange)="getSmscMapping($event)" [(ngModel)]="country" name="country" class="form-control">
+              <option [ngValue]="country">Select a country </option>
+              <option *ngFor="let country of countries" [ngValue]="country" >{{ country.countryName }}</option>              
+          </select>
+
+
+  
+        </div>
+ 
+  </div>
+
+  <div class="form-group">
+     <div class=""></div>
+        <div class="" >
+              
+                  <input type="text" name="role" class="form-control" [(ngModel)]="countryToAdd" placeholder="add country name..."/>
+              </div>
+    </div>
+    <div class="form-group">
+    <a  (click)="addCountry(countryToAdd)" class="btn btn-country">Add Country</a>
+    </div>
+
+  </div>
+  </div>
+
+<p></p>
+
+<!--Rows Headers-->
+  <!--<div class="row row-bkg-blue">
+  
+  <div class="form-group col-xs-3 labelCountry">
+            <label class="labelCountry" for="emailId">Prefix</label>
+  </div>
+  <div class="form-group col-xs-3 labelCountry">
+            <label  class="labelCountry"  for="emailId">Priority</label>
+  </div>
+  <div class="form-group col-xs-3 labelCountry">
+            <label  class="labelCountry"  for="emailId">Name</label>
+  </div>
+  <div class="form-group col-xs-3 labelCountry">
+            <label  class="labelCountry"  for="emailId">Action</label>
+  </div>
+  </div>-->
+
+  <!--Actual Contents rows-->
+<div class="row">
+<table class="table table-striped table-condensed">
+        <thead class="row-bkg-blue">
+        <tr>
+            <th class="tableContent">Prefix</th>
+            <th class="tableContent">Priority</th>
+			      <th class="tableContent">Name</th>
+            <th class="tableContent">Action</th>			      
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let smsc of smscList">
+          
+
+        	  <td class="tableContent">{{ smsc.smscSelection.prefix}}</td>
+            <td class="tableContent">{{ smsc.priority}}</td>
+            <td class="tableContent">{{ smsc.smsc.name}}</td>            
+            
+            <td class="tableContent"><a (click)="deleteSmscMapping(smsc.smsMappingId,smsc.smscSelection.smscSelectionId)" class="btn-cancel btn">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div *ngIf="country">
+<div class="row">
+  <form class="form-inline" #smscForm="ngForm" >
+    <div class="form-group col-xs-3 tableContent" >
+            <div >
+                <input  name="prefix"  class="form-control" [(ngModel)]="smscForm.prefix" placeholder="Prefix"/>
+            </div>
+        </div>
+        <div class="form-group col-xs-3 ">
+            <div >
+              <select  [(ngModel)]="smscForm.priority" name="priority" class="form-control">
+                <option [ngValue]="1">1</option>
+                <option [ngValue]="2">2</option>
+                <option [ngValue]="3">3</option>  
+              </select>
+            </div>
+        </div>
+        <div class="form-group  col-xs-3">
+            <div >
+                <!--<input type="text" name="smscName" class="form-control" [(ngModel)]="country" placeholder="Name"/>-->
+                <select [(ngModel)]="smscForm.smscId" name="smscName" class="form-control">
+                    <option *ngFor="let item of smscProviderList" [ngValue]="item.smscId" >{{ item.name }}</option>              
+                </select>               
+
+            </div>
+        </div>
+        
+        <!--<div>
+            <input type="hidden" hidden name="smscDetailsId" class="form-control" [(ngModel)]="smsc.smscId" placeholder="smscDetailsId"> 
+        </div>-->
+        
+        <div class="form-group col-xs-6" style="margin:1%">
+            <div class="controls">
+                <a (click)="addSmscMapping(smscForm,selectedValue)" class="btn-country-add btn" >Add</a>
+               
+            </div>
+        </div>
+        <!--</div>-->
+    </form>
+
+    
+
+</div>
+</div>
+
+</div>

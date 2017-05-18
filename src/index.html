@@ -1,16 +1,25 @@
 <!doctype html>
 <html>
 <head>
+  <base href="/">
   <meta charset="utf-8">
   <title>MessageHubUi</title>
-  <base href="/">
+  
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="assets/bootstrap/bootstrap.min.js"></script>
   <link data-require="bootstrap-css@3.1.1" rel="stylesheet" href="assets/bootstrap/bootstrap.min.css" />
   <link rel="stylesheet" href="assets/css/app.css" />
+
   
-  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typescript/2.1.1/typescript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/zone.js/0.8.5/zone.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/systemjs/0.19.38/system.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
 <!--
   <script>
     $(document).ready(function() {
@@ -26,6 +35,27 @@ $(window).on("popstate", function() {
     $("a[href='" + anchor + "']").tab("show");
 });
     </script>-->
+<!--
+ <script>
+    System.config({
+        transpiler: 'typescript', 
+        typescriptOptions: { emitDecoratorMetadata: true }, 
+        //
+        // We need to define a package for each of the applications we want to 
+        //  run on the page
+        //
+        packages: {
+          'app': {defaultExtension: 'ts'},
+          'app-two': {defaultExtension: 'ts'}  
+        } 
+      });
+      
+      // Now that the SystemJS configuration is ready we can import the 
+      //  code and let them start up independently
+      //
+      System.import('main').then(null, console.error.bind(console));
+      System.import('main2').then(null, console.error.bind(console));
+  </script>-->
 
 </head>
 <body>
@@ -67,5 +97,9 @@ $(window).on("popstate", function() {
   </div>
 </nav>-->
   <app-root>Loading...</app-root>
+ 
+  
+<router-outlet></router-outlet>
+
 </body>
 </html>

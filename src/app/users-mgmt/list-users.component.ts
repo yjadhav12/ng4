@@ -6,7 +6,7 @@ import {   Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-list-users',
-   providers: [HttpModule],
+  providers: [HttpModule],
   templateUrl: './list-users.component.html',
   styleUrls: ['./list-users.component.css']
 })
@@ -29,13 +29,14 @@ export class ListUsersComponent implements OnInit {
     )
    {}
   ngOnInit() {
+    console.log("Getting ALl Users");
     this.getAllUsers();
   }
 
   editUser(userDetailsId : number){
     console.log("EditUser"+userDetailsId);
 
-    this.router.navigate(['/editUser', userDetailsId]);
+    this.router.navigate(['./editUser', userDetailsId]);
   }
 
   deleteUser(userDetailsId : number){
@@ -74,6 +75,8 @@ export class ListUsersComponent implements OnInit {
           console.error(error);
         }
       )
+      
+
     
   }
 

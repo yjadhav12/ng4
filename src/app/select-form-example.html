@@ -1,0 +1,14 @@
+<form>
+  <md-select placeholder="Favorite food" [(ngModel)]="selectedValue" name="food">
+    <md-option *ngFor="let food of foods" [value]="food.value">
+      {{food.viewValue}}
+    </md-option>
+  </md-select>
+
+  <p> Selected value: {{selectedValue}} </p>
+</form>
+
+
+<!-- Copyright 2017 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->
