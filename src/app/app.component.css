@@ -1,0 +1,36 @@
+
+.glyphicon-menu-left:before {
+   vertical-align: middle;
+   font-family: 'Glyphicons Halflings';
+}
+.glyphi-contents{
+    color:#707070;
+    text-align: left;
+    vertical-align: middle;
+    margin-bottom: 7px;
+    margin-top: 3px;
+    font-family: "Helvetica";
+    font-weight: bold;
+}
+.glyphi-contents:hover {
+    color: black;
+}
+
+.btn-switch-module-default {
+    
+    width: 135px;
+   line-height: 20px;
+   display: block;
+   text-align: center;
+   background: #f7f7f7;
+   color: #fff;
+    border-color: #000;
+    border-radius: 4px;
+    border: 1px solid ;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding: 4px 12px;
+height: 36px;
+    font-family: "Helvetica";
+    font-weight: bold;
+}

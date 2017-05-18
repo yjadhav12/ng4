@@ -1,0 +1,73 @@
+.input {
+  border-radius: 0;
+  outline: none;
+}
+.input:hover {
+  border: 1px solid #0033cc;
+}
+.btn {
+  width: 100px;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+   font-weight: regular;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+
+  border: none;
+  border-radius: 4px;
+  background-color: #0033cc;
+
+}
+.btn:hover {
+  background-color: #315bd6;
+  color: #fff
+}
+.btn-cancel:hover {
+  background-color: #BDBDBD;
+  color: #fff
+}
+ .btn-cancel {   
+   
+    border-radius: 4px;
+    background-color: #B2B2B2;
+    color: #fff;
+    height: 36px;
+    width: 100px;
+    font-family: "Helvetica";
+    font-weight: regular;
+    
+}
+.user {
+  border: 1px solid #9b59b6;
+  cursor: pointer;
+  padding: 1em;
+  margin: 1em;
+}
+
+.user:hover {
+  box-shadow: 1px 2px 3px #ccc;
+}
+
+.box {
+  border: 1px solid #9b59b6;
+  padding: 2em;
+}
+
+.box > .details {
+  margin-top: 1em;
+  font-family: monospace;
+}

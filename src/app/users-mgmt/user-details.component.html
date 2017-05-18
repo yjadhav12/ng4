@@ -1,0 +1,65 @@
+<div class="col-xs-4">
+    
+</div>
+<div class="container col-xs-4">
+    <h1>
+        Edit User
+    </h1>
+    <form novalidate >
+    
+         <div *ngIf="user">
+             
+        <div class="form-group">
+            <label  for="inputFirstName">First name:</label>
+
+            <div >
+                <input  name="inputFirstName"  class="form-control" [(ngModel)]="user.firstName" placeholder="First name"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  for="inputLastName">Last name:</label>
+
+            <div >
+                <input type="text" name="inputLastName" class="form-control" [(ngModel)]="user.lastName" placeholder="Last name"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  for="userName">User name:</label>
+
+            <div >
+                <input type="text" name="userName" class="form-control" [(ngModel)]="user.userName" placeholder="User name"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  for="password">Password:</label>
+
+            <div >
+                <input type="text" disabled="true" name="password" class="form-control" [(ngModel)]="user.password" placeholder="Password"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  for="emailId">Email-Id:</label>
+
+            <div >
+                <input type="text" name="emailId" class="form-control" [(ngModel)]="user.emailId" placeholder="emailId"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  for="role">User Role:</label>
+
+            <div >
+                <input type="text" name="role" class="form-control" [(ngModel)]="user.role" placeholder="role"/>
+            </div>
+        </div>
+        <div>
+            <input type="hidden" hidden name="userDetailsId" class="form-control" [(ngModel)]="user.userDetailsId" placeholder="userDetailsId"> 
+        </div>
+        <div class="form-group">
+            <div class="controls">
+                <button (click)="updateUser(user)" class="btn btn-small btn-primary">Update User</button>
+                <button (click)="cancel()" class="btn-cancel">Cancel</button>                
+            </div>
+        </div>
+        </div>
+    </form>
+</div>

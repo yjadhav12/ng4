@@ -1,0 +1,90 @@
+<div class="col-xs-4">
+    
+</div>
+<div class="container col-xs-4">
+    <h1>
+        Create User
+    </h1>
+    <form [formGroup]="userForm" novalidate (ngSubmit)="createUser2(userForm.value, userForm.valid)"  >
+        <div class="form-group">
+            <label class=" " >User name:</label>
+              
+            <div class="">
+                <input type="text" class="form-control" formControlName="userName"> 
+                <small [hidden]="userForm.controls.userName.valid || (userForm.controls.userName.pristine)" class="text-danger">
+            Last Name is required.
+          </small>
+            </div>
+        </div>
+       
+        <div class="form-group">
+            <label class=" " >Password:</label>
+              
+            <div class="">
+                <input type="text" class="form-control" formControlName="password"> 
+                <small [hidden]="userForm.controls.password.valid || (userForm.controls.password.pristine)" class="text-danger">
+            Last Name is required.
+          </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class=" " >Confirm Password:</label>
+              
+            <div class="">
+                <input type="text" class="form-control" formControlName="confirmPassword"> 
+                <small [hidden]="userForm.controls.confirmPassword.valid || (userForm.controls.confirmPassword.pristine)" class="text-danger">
+            Last Name is required.
+          </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class=" " >First name:</label>
+              
+            <div class="">
+                <input type="text" class="form-control" formControlName="firstName"> 
+                <small [hidden]="userForm.controls.firstName.valid || (userForm.controls.firstName.pristine)" class="text-danger">
+            First Name is required.
+          </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class=" " >Last name:</label>
+              
+            <div class="">
+                <input type="text" class="form-control" formControlName="lastName"> 
+                <small [hidden]="userForm.controls.lastName.valid || (userForm.controls.lastName.pristine)" class="text-danger">
+            Last Name is required.
+          </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class=" " >Email:</label>
+              
+            <div class="">
+                <input type="text" class="form-control" formControlName="emailId"> 
+                <small [hidden]="userForm.controls.emailId.valid || (userForm.controls.emailId.pristine)" class="text-danger">
+            Last Name is required.
+          </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class=" " >User Role:</label>
+              
+            <div class="">
+                <input type="text" class="form-control" formControlName="role"> 
+                <small [hidden]="userForm.controls.role.valid || (userForm.controls.role.pristine)" class="text-danger">
+            Last Name is required.
+          </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="controls">
+                <button (click)="createUser(userForm.value, userForm.valid)" class="btn  btn-primary">Create User</button>
+                <button (click)="cancel()" class=" btn-small btn-cancel">Cancel</button>
+                
+            </div>
+        </div>
+     
+    </form>
+</div>
