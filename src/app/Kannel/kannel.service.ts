@@ -9,7 +9,7 @@ import { User } from '../users-mgmt/user.interface';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 
 @Injectable()
-export class GatewayNumbersService {
+export class KannelService {
 
   //private searchUsersEndPoint = "https://api.github.com/search/users?q=";
   private baseUrl = environment.baseUrl;
@@ -142,21 +142,6 @@ addSmscMapping(smscForm, countryId) {
       .map(this.extractData)
       .catch(this.handleError);
   }
-
-  addGateway(gatewayForm){
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-
-    console.log("Add SMSC Mapping : "+gatewayForm.gatewayAddress);
-    let url = `${this.baseUrl}addgatewaynumber/add?number=${gatewayForm.gatewayAddress}`;
-        console.log(url);
-
-       return this.http.post(url,{headers: headers})
-      .map(this.extractData)
-        .catch(this.handleError);
-
-       // return this.getSmscMapping(countryId);   
- }
 
   // getAllActivityLogs() {
   //   let url;

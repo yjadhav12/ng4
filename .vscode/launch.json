@@ -10,7 +10,7 @@
             "name": "Launch Program",
             "program": "${file}",
             "outFiles": [
-                "${workspaceRoot}/out/**/*.js"
+               
             ]
         }
     ]

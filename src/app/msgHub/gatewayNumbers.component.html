@@ -2,11 +2,94 @@
 
 <div class="container">
 
- <!-- items being paged -->
-            <div *ngFor="let item of gatewayNumbers.source">{{item.gatewayAddress}}</div>
- 
-            <!-- pager -->
-            <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+<div class="row">
+  <form class="form-inline" #gatewayForm="ngForm" >
+    <div class="form-group col-xs-3 tableContent" >
+            <div >
+                <input  name="prefix"  class="form-control" [(ngModel)]="gatewayForm.gatewayAddress" placeholder="Gateway Address"/>
+            </div>
+        </div>
+        <div class="form-group col-xs-3 ">
+            <div style="padding-left:54px">
+              <a (click)="addGateway(gatewayForm)" class="btn-country-add btn" >Add</a>
+              <p></p>
+
+            </div>
+        </div>
+        <div class="form-group  col-xs-3">
+            <div >
+                <!--<input type="text" name="smscName" class="form-control" [(ngModel)]="country" placeholder="Name"/>-->
+                <!--<select [(ngModel)]="gatewayForm.smscId" name="smscName" class="form-control">
+                    <option *ngFor="let item of smscProviderList" [ngValue]="item.smscId" >{{ item.name }}</option>              
+                </select>               -->
+
+            </div>
+        </div>
+        
+        <!--<div>
+            <input type="hidden" hidden name="smscDetailsId" class="form-control" [(ngModel)]="smsc.smscId" placeholder="smscDetailsId"> 
+        </div>-->
+        
+        <!--<div class="form-group col-xs-6" style="margin-left: 2.7%; margin-top: 1%; margin-bottom: 1%;">
+            <div class="controls">
+                <a (click)="addGateway(gatewayForm)" class="btn-country-add btn" >Add</a>
+               
+            </div>
+        </div>-->
+        <!--</div>-->
+    </form>
+
+    
+
+</div>
+
+
+<section *ngIf="alertDisplayed">
+    <div class="alert alert-info">
+    <strong>Info!</strong> {{resStatusMsg}}
+  </div>
+</section>
+
+
+<!--Actual Contents rows-->
+<div class="row">
+<table class="table table-striped table-condensed ">
+        <thead class="row-bkg-blue">
+        <tr>
+            <th class="tableContent">Gateway Address</th>
+            <th class="tableContent">Routing Key</th>
+			<th class="tableContent">Status</th>
+            <th class="tableContent">Action</th>			      
+            <th class="tableContent">Action</th>			      
+        </tr>
+        </thead>
+        <tbody>
+        <tr  *ngFor="let item of gatewayNumbers">
+          
+
+        	<td class="tableContent">{{ item.gatewayAddress }}</td>
+            <td class="tableContent">
+                 <input type="textbox" class="form-control" name="routingKey" [(ngModel)]="item.routingKey" >
+            </td>
+            <td class="tableContent"> 
+                
+                <input type="checkbox" [(ngModel)]="item.isEnabled" name="status"  
+                        [checked]="item.isEnabled == true">
+
+                </td>            
+            <td class="tableContent"><a (click)="updateGateWay(item.gatewayNumbersId, item.routingKey, item.isEnabled)" class="btn-cancel btn">Update</a></td>
+            <td class="tableContent"><a (click)="deleteGateWay(item.gatewayNumbersId)" class="btn-cancel btn">Delete</a></td>
+        </tr>
+        
+        </tbody>
+        
+    </table>
+    <div class="row" >    
+            <div class="col-xs-2">
+            </div>
+
+        <!-- pager -->
+            <ul *ngIf="pager.pages && pager.pages.length" class=" col-xs-10 pagination">
                 <li [ngClass]="{disabled:pager.currentPage === 1}">
                     <a (click)="setPage(1)">First</a>
                 </li>
@@ -23,49 +106,19 @@
                     <a (click)="setPage(pager.totalPages)">Last</a>
                 </li>
             </ul>
-
-<!--Actual Contents rows-->
-<div class="row">
-<table class="table table-striped table-condensed ">
-        <thead class="row-bkg-blue">
-        <tr>
-            <th class="tableContent">Gateway Address</th>
-            <th class="tableContent">Routing Key</th>
-			<th class="tableContent">Status</th>
-            <th class="tableContent">Action</th>			      
-        </tr>
-        </thead>
-        <tbody>
-        <tr  *ngFor="let item of gatewayNumbers.source">
-          
-
-        	<td class="tableContent">{{ item.gatewayAddress }}</td>
-            <td class="tableContent">
-                 <input type="textbox" class="form-control" name="routingKey" [(ngModel)]="item.routingKey" >
-            </td>
-            <td class="tableContent"> 
-                
-                <input type="checkbox" [(ngModel)]="item.isEnabled" (ngModelChange)="updateGateWay($event)" name="status"  
-                        [checked]="item.isEnabled == true">
-
-                </td>            
-            
-            <td class="tableContent"><a (click)="deleteGateWay(item.gatewayNumbersId,page)" class="btn-cancel btn">Delete</a></td>
-        </tr>
-        </tbody>
-    </table>
+          </div>  
 </div>
 <div *ngIf="country">
 <div class="row">
-  <form class="form-inline" #smscForm="ngForm" >
+  <form class="form-inline" #gatewayForm="ngForm" >
     <div class="form-group col-xs-3 tableContent" >
             <div >
-                <input  name="prefix"  class="form-control" [(ngModel)]="smscForm.prefix" placeholder="Prefix"/>
+                <input  name="prefix"  class="form-control" [(ngModel)]="gatewayForm.prefix" placeholder="Prefix"/>
             </div>
         </div>
         <div class="form-group col-xs-3 ">
             <div >
-              <select  [(ngModel)]="smscForm.priority" name="priority" class="form-control">
+              <select  [(ngModel)]="gatewayForm.priority" name="priority" class="form-control">
                 <option [ngValue]="1">1</option>
                 <option [ngValue]="2">2</option>
                 <option [ngValue]="3">3</option>  
@@ -75,7 +128,7 @@
         <div class="form-group  col-xs-3">
             <div >
                 <!--<input type="text" name="smscName" class="form-control" [(ngModel)]="country" placeholder="Name"/>-->
-                <select [(ngModel)]="smscForm.smscId" name="smscName" class="form-control">
+                <select [(ngModel)]="gatewayForm.smscId" name="smscName" class="form-control">
                     <option *ngFor="let item of smscProviderList" [ngValue]="item.smscId" >{{ item.name }}</option>              
                 </select>               
 
@@ -88,7 +141,7 @@
         
         <div class="form-group col-xs-6" style="margin:1%">
             <div class="controls">
-                <a (click)="addSmscMapping(smscForm,selectedValue)" class="btn-country-add btn" >Add</a>
+                <a (click)="addSmscMapping(gatewayForm,selectedValue)" class="btn-country-add btn" >Add</a>
                
             </div>
         </div>
@@ -99,5 +152,4 @@
 
 </div>
 </div>
-
 </div>

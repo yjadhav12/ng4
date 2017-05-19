@@ -22,18 +22,22 @@ class Smsc {
 })
 export class GatewayNumbersComponent implements OnInit{
 
-gatewayNumbers : any[] = []; 
+gatewayNumbers : any[] = [];
 gateway = this.gatewayNumbers[1];
+
+response ;
 
 smscList : any[] = []; 
 error_text: string = ""; 
 
-@ViewChild('smscForm') smscForm: FormGroup
+@ViewChild('gatewayForm') gatewayForm: FormGroup
 ngForm : NgForm;  
 
 countryToAdd : string;
 selectedValue: string;
 smsc : Smsc;
+
+
 
 constructor( private gatewayNumbersService: GatewayNumbersService,
   private route: ActivatedRoute,
@@ -44,6 +48,8 @@ constructor( private gatewayNumbersService: GatewayNumbersService,
   console.log("In GatewayNumbersComponent" );
 
 }
+
+
 
  // array of all items to be paged
    // private allItems: any[];
@@ -59,7 +65,7 @@ ngOnInit() {
     this.getAllGatewayNumbers();
     
 
-    this.smscForm = this._fb.group({
+    this.gatewayForm = this._fb.group({
             smscId: ['', [<any>Validators.required, <any>Validators.minLength(1)]],
             prefix:['', [<any>Validators.required, <any>Validators.minLength(1)]],
             name:['', [<any>Validators.required, <any>Validators.minLength(1)]],
@@ -72,20 +78,28 @@ ngOnInit() {
             return;
         }
  
+        
+
         // get pager object from service
-        this.pager = this.pagerService.getPager(this.gatewayNumbers.length, page);
- 
+        this.pager = this.pagerService.getPager(this.response.source.length, page);
+        
+        console.log("All Length:"+this.response.source.length+" pager"+this.pager.pages+" "+this.pager.pages.length);
+        
+        console.log("start n end:"+this.pager.startIndex, this.pager.endIndex);
         // get current page of items
-        this.pagedItems = this.gatewayNumbers.slice(this.pager.startIndex, this.pager.endIndex + 1);
+        this.pagedItems = this.response.source.slice(this.pager.startIndex, this.pager.endIndex + 1);
+        this.gatewayNumbers  = this.response.source.slice(this.pager.startIndex, this.pager.endIndex + 1);
+         console.log("pagedItems are:"+this.pagedItems.length);
     }
+  
   getAllGatewayNumbers() {
     this.error_text = "";
     
       this.gatewayNumbersService.getAllGatewayNumbers().subscribe(
         res => {
           this.gatewayNumbers = res;
-          this.setPage(1);
-          console.log("Result +"+ res.source[0].gatewayAddress);
+          this.response = res;
+          this.setPage(1);        
 
         },
         error => {
@@ -97,50 +111,70 @@ ngOnInit() {
 
     
   }
+  alertDisplayed;
+resStatusMsg ="";
 
-  updateGateWay(input){
-    console.log("event1");
-    console.log("event + "+input);
-  }
-  
-  smscProviderList;
-
-  getAllSmscList() {
-    this.error_text = "";
-    console.log("Getting All smscList - 2  " );
-      this.gatewayNumbersService.getAllSmscList().subscribe(
-        res => {
-          this.smscProviderList = res;
-        },
-        error => {
-          this.smscProviderList = [];
-          this.error_text = "Sorry! No smscList found. Try again";
-          console.error(error);
-        }
-      )
-
+  updateGateWay(gatewayNumbersId, routingKey, isEnabled){
     
-  }
-
-  addCountry(countryToAdd: String) {
-   console.log("Adding New Country "+countryToAdd);
-    this.gatewayNumbersService.addUser(countryToAdd)
+    this.gatewayNumbersService.updateGateWay(gatewayNumbersId, routingKey, isEnabled)
     .subscribe((response) => {
-      //this.router.navigate(['/users-list']);
+      this.response = response;   
+      this.resStatusMsg = response.status;
       this.getAllGatewayNumbers();
+      this.alertDisplayed = true;
+      setTimeout(() => {this.alertDisplayed = false;this.resStatusMsg = "";
+      }
+      , 1000);
     }
     );
     
   }
+
+  deleteGateWay(gatewayNumbersId){
+    
+    this.gatewayNumbersService.deleteGateWay(gatewayNumbersId)
+    .subscribe((response) => {
+      this.response = response;   
+      this.resStatusMsg = response.status;
+      this.getAllGatewayNumbers();
+      this.alertDisplayed = true;
+      setTimeout(() => {this.alertDisplayed = false;this.resStatusMsg = "";
+      }
+      , 1000);
+    }
+    );
+  }
  
-//  addSmscMapping(smscForm){
-//   console.log("Add SMSC Mapping : "+smscForm.smscId);
+  addGateway(gatewayForm) {
+    console.log("AgatewayForm "+gatewayForm.gatewayAddress);
+
+     this.gatewayNumbersService.addGateway(gatewayForm)
+    .subscribe((response) => {
+      //this.router.navigate(['/users-list']);
+      this.getAllGatewayNumbers();
+      this.gatewayForm.reset();
+      
+      this.response = response;   
+      this.resStatusMsg = response.status;
+      
+      this.alertDisplayed = true;
+      setTimeout(() => {this.alertDisplayed = false;this.resStatusMsg = "";
+      }
+      , 1000);
+
+    }
+    );
+
+  }
+ 
+//  addSmscMapping(gatewayForm){
+//   console.log("Add SMSC Mapping : "+gatewayForm.smscId);
 //   console.log("Add SMSC Mapping : "+this.country.countryId);
-//   this.gatewayNumbersService.addSmscMapping(smscForm,this.country.countryId)
+//   this.gatewayNumbersService.addSmscMapping(gatewayForm,this.country.countryId)
 //     .subscribe((response) => {
      
 //       this.getSmscMapping(this.country);
-//       this.smscForm.reset();
+//       this.gatewayForm.reset();
       
 //     }
 //     );
@@ -183,7 +217,7 @@ ngOnInit() {
    }
 
    reset(){
-      this.smscForm.reset();
+      this.gatewayForm.reset();
     
    }
 

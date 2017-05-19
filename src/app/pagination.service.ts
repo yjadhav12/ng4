@@ -32,6 +32,9 @@ export class PagerService {
         let pages = _.range(startPage, endPage + 1);
  
         // return object with all pager properties required by the view
+
+
+
         return {
             totalItems: totalItems,
             currentPage: currentPage,
