@@ -11,6 +11,11 @@ import { AppComponent } from './app.component';
 import { ListUsersComponent } from './users-mgmt/list-users.component';
 import { GatewayNumbersComponent } from './msgHub/gatewayNumbers.component';
 import { KannelComponent } from './kannel/kannel.component';
+import { KannelBindListComponent } from './kannel/kannelBindsList.component';
+import { KannelDetailsComponent } from './kannel/kannel-details.component';
+import { CreateKannelComponent } from './kannel/create-kannel.component';
+import { CreateBindComponent } from './kannel/create-bind.component';
+import { BindDetailsComponent } from './kannel/bind-details.component';
 
 
 import { UserDetailsComponent } from './users-mgmt/user-details.component';
@@ -25,6 +30,7 @@ import {CountrySmscService} from './msgHub/country-smsc.service';
 import {GatewayNumbersService} from './msgHub/gatewayNumbers-smsc.service';
 import { PagerService } from './pagination.service';
 import {KannelService} from './kannel/kannel.service';
+
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MdSelectModule} from '@angular/material';
@@ -49,11 +55,10 @@ const appRoutes: Routes = [
       pathMatch: 'full' },
   
    { path: 'users-list', component: ListUsersComponent },
-   { path: 'editUser/:id', component: UserDetailsComponent },
+   
    { path: 'deleteUser/:id', component: UserDetailsComponent },
    { path: 'user-creation', component: CreateUserComponent },
    { path: 'user-logs', component: ActivityLogComponent },
-   { path: 'kannel', component: KannelComponent },
    
   { path: 'homePage', component: MsgHubAppComponent, 
      children: [
@@ -65,7 +70,7 @@ const appRoutes: Routes = [
           { path: 'deleteUser/:id', component: UserDetailsComponent },
           { path: 'user-creation', component: CreateUserComponent },
           { path: 'user-logs', component: ActivityLogComponent },
-          { path: 'kannel', component: KannelComponent },
+          
         ]
   }]},
   { path: 'adminPage', component: AdminHubAppComponent,
@@ -77,7 +82,28 @@ const appRoutes: Routes = [
           { path: 'editUser/:id', component: UserDetailsComponent },
           { path: 'deleteUser/:id', component: UserDetailsComponent },
           { path: 'user-creation', component: CreateUserComponent },
-          { path: 'user-logs', component: ActivityLogComponent }
+          { path: 'user-logs', component: ActivityLogComponent },
+          { path: 'viewBinds/:id', component: KannelBindListComponent },
+          { path: 'updateKannel/:id', component: KannelDetailsComponent },
+          { path: 'addKannel', component: CreateKannelComponent},
+          { path: 'addBind', component: CreateBindComponent},
+          { path: 'editBind/:id', component: BindDetailsComponent},
+          { path: 'deleteBind/:id', component: BindDetailsComponent},
+                    
+          { path: 'kannel', component: KannelComponent
+          // ,children: [
+          //         {
+          //           path: '',
+          //           children: [
+          //             { path: 'viewBinds/:id', component: KannelBindListComponent },
+          //             { path: 'viewBinds', component: KannelBindListComponent }
+                      
+          //             ]}]    
+    
+  }
+
+
+
         ]
   }]},
 
@@ -108,15 +134,24 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    
     ListUsersComponent,
     UserDetailsComponent,
     CreateUserComponent,
     ActivityLogComponent,
+    
     MsgHubAppComponent,
     AdminHubAppComponent,
+    
     CountryAppComponent,
     GatewayNumbersComponent,
+
     KannelComponent,
+    KannelBindListComponent,
+    KannelDetailsComponent,
+    CreateKannelComponent,
+    CreateBindComponent,
+    BindDetailsComponent,
 
     FilteredList,
     FilterPipe ,

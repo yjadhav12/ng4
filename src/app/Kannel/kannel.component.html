@@ -1,90 +1,72 @@
-<div class="col-xs-4">
+
+
+<div class="container">
+
+<div class="row">
+  <form class="form-inline" #kannelForm="ngForm" >
+    <div class="form-group col-xs-3 tableContent" >
+            <div >
+                <!--<input  name="prefix"  class="form-control" [(ngModel)]="kannelForm.gatewayAddress" placeholder="Gateway Address"/>-->
+            </div>
+        </div>
+        <div class="form-group col-xs-3 ">
+            <div style="padding-left:54px">
+              <a (click)="addNewKannel()" class="btn-country-add btn" >Add Kannel</a>
+              <p></p>
+
+            </div>
+        </div>
+        <div class="form-group  col-xs-3">
+            <div >
+                <a (click)="addNewBind()" class="btn-country-add btn" >Add Bind</a>
+            </div>
+        </div>
+        
+    </form>
+
+    
+
+</div>
+
+
+<section *ngIf="alertDisplayed">
+    <div class="alert alert-info">
+    <strong>Info!</strong> {{resStatusMsg}}
+  </div>
+</section>
+
+
+<!--Actual Contents rows-->
+<div class="row">
+<table class="table table-striped table-condensed ">
+        <thead class="row-bkg-blue">
+        <tr>
+            <th class="tableContent">Kannel Server</th>
+            <th class="tableContent">URL</th>
+			
+            <th class="tableContent">Action</th>			      
+            <th class="tableContent">View All Binds</th>
+            <!--<th class="tableContent">Action</th>			      -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr  *ngFor="let item of kannelList">
+          
+
+        	<td class="tableContent">{{ item.server }}</td>
+            <td class="tableContent">{{ item.kannelUrl }}</td>
+                 <!--<input type="textbox" class="form-control" name="kannelUrl" [(ngModel)]="item.kannelUrl" >-->
+            
+                      
+            <td class="tableContent"><a (click)="updateKannel(item.kannelSettingsId)" class="btn-cancel btn">Update</a></td>
+            <td class="tableContent"><a (click)="viewAllBinds(item.kannelSettingsId)" class="btn-cancel btn">View Binds</a></td>
+            <!--<td class="tableContent"><a (click)="deleteGateWay(item.gatewayNumbersId)" class="btn-cancel btn">Delete</a></td>-->
+        </tr>
+        
+        </tbody>
+        
+    </table>
     
 </div>
-<div class="container col-xs-4">
-    <h1>
-        New Bind Setup
-    </h1>
-    <form [formGroup]="userForm" novalidate (ngSubmit)="createUser2(userForm.value, userForm.valid)"  >
-        <div class="form-group">
-            <label class=" " >Default Route:</label>
-              
-            <div class="">
-                <input type="text" class="form-control" formControlName="userName"> 
-                <small [hidden]="userForm.controls.userName.valid || (userForm.controls.userName.pristine)" class="text-danger">
-            Last Name is required.
-          </small>
-            </div>
-        </div>
-       
-        <div class="form-group">
-            <label class=" " >Network Name:</label>
-              
-            <div class="">
-                <input type="text" class="form-control" formControlName="password"> 
-                <small [hidden]="userForm.controls.password.valid || (userForm.controls.password.pristine)" class="text-danger">
-            Last Name is required.
-          </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class=" " >Host:</label>
-              
-            <div class="">
-                <input type="text" class="form-control" formControlName="confirmPassword"> 
-                <small [hidden]="userForm.controls.confirmPassword.valid || (userForm.controls.confirmPassword.pristine)" class="text-danger">
-            Last Name is required.
-          </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class=" " >User name:</label>
-              
-            <div class="">
-                <input type="text" class="form-control" formControlName="firstName"> 
-                <small [hidden]="userForm.controls.firstName.valid || (userForm.controls.firstName.pristine)" class="text-danger">
-            First Name is required.
-          </small>
-            </div>
-        </div>
 
-        <div class="form-group">
-            <label class=" " >Password:</label>
-              
-            <div class="">
-                <input type="text" class="form-control" formControlName="lastName"> 
-                <small [hidden]="userForm.controls.lastName.valid || (userForm.controls.lastName.pristine)" class="text-danger">
-            Last Name is required.
-          </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class=" " >No Reply Number:</label>
-              
-            <div class="">
-                <input type="text" class="form-control" formControlName="emailId"> 
-                <small [hidden]="userForm.controls.emailId.valid || (userForm.controls.emailId.pristine)" class="text-danger">
-            Last Name is required.
-          </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class=" " >AWS on Shore Bind:</label>
-              
-            <div class="">
-                <input type="text" class="form-control" formControlName="role"> 
-                <small [hidden]="userForm.controls.role.valid || (userForm.controls.role.pristine)" class="text-danger">
-            Last Name is required.
-          </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="controls">
-                <button (click)="createUser(userForm.value, userForm.valid)" class="btn  btn-primary">Submit</button>
-                <button (click)="cancel()" class=" btn-small btn-cancel">Cancel</button>
-                
-            </div>
-        </div>
-     
-    </form>
 </div>

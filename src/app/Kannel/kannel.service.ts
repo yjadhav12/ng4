@@ -7,6 +7,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { User } from '../users-mgmt/user.interface';
 import { ActivatedRoute, Router, Params } from '@angular/router';
+import { Kannel } from './kannel.interface';
 
 @Injectable()
 export class KannelService {
@@ -20,29 +21,9 @@ export class KannelService {
   private router: Router) { }
   static moduleName;
 
-  // // Observable string sources
-  // private missionAnnouncedSource = new Subject<boolean>();
-  // private missionConfirmedSource = new Subject<boolean>();
-
-  // // Observable string streams
-  // missionAnnounced$ = this.missionAnnouncedSource.asObservable();
-  // missionConfirmed$ = this.missionConfirmedSource.asObservable();
-
-  // // Service message commands
-  // announceMission(mission: string) {
-  //     console.log(mission);
-  //     //this.missionAnnouncedSource.next(mission);
-  // }
-
-  // confirmMission(astronaut: string) {
-  //     console.log(astronaut);
-  //     //this.missionConfirmedSource.next(astronaut);
-  // }
-  
-
-  getAllGatewayNumbers() {
+  getAllKannelSettings() {
     let url;
-    url = `${this.baseUrl}addgatewaynumber/numbers`;
+    url = `${this.baseUrl}kannel/getSettings`;
     console.log(url);
 
     return this.http.get(url)
@@ -50,9 +31,9 @@ export class KannelService {
       ;
   }
 
-  getAllSmscList() {
+  getKannelSetting(id : number) {
     let url;
-    url = `${this.baseUrl}country/smsc`;
+    url = `${this.baseUrl}kannel/getSetting/${id}`;
     console.log(url);
 
     return this.http.get(url)
@@ -60,24 +41,9 @@ export class KannelService {
       ;
   }
 
-  addUser(country: String) {
-    let headers = new Headers();
-  headers.append('Content-Type', 'application/json');
-
-    if (country) {
-      let url = `${this.baseUrl}country/add/${country}`;
-      console.log(url);
-     
-    return this.http.get(url)
-       .map(this.extractData)
-       .catch(this.handleError);
-
-    }
-  }
-
-  getSmscMapping(countryId: number) {
-    if (countryId) {
-      let url = `${this.baseUrl}country/${countryId}`;
+  getAllBindsForKannelId(id : number) {
+   if (id) {
+      let url = `${this.baseUrl}kannel/getBindings/${id}`;
       console.log(url);
 
       return this.http.get(url)
@@ -86,116 +52,101 @@ export class KannelService {
     }
   }
 
-  deleteSmscMapping(smsMappingId : number, smscSelectionId : number, countryId : number) {
-   
-      let url = `${this.baseUrl}country/delete/${smsMappingId}/${smscSelectionId}`;
+  getBind(id : number) {
+   if (id) {
+      let url = `${this.baseUrl}kannel/getBind/${id}`;
       console.log(url);
 
-       this.http.get(url)
-      .catch(this.handleError).subscribe();
-
-       return this.getSmscMapping(countryId);
-    
+      return this.http.get(url)
+        .map((res: Response) => res.json())
+        .catch(this.handleError);
+    }
   }
-  //create/{countryId}/{prefix}/{priority}/{smscId}
 
-addSmscMapping(smscForm, countryId) {
+  // deleteKannel(id : number) {
    
-      let url = `${this.baseUrl}country/create/${countryId}/${smscForm.prefix}/${smscForm.priority}/${smscForm.smscId}`;
+  //     let url = `${this.baseUrl}kannel/deleteKannel/${id}`;
+  //     console.log(url);
+
+  //      return this.http.delete(url)
+  //     .catch(this.handleError);      
+    
+  // }
+
+  deleteBind(id : number) {
+   
+      let url = `${this.baseUrl}kannel/deleteBind/${id}`;
       console.log(url);
 
-       this.http.get(url)
-      .catch(this.handleError).subscribe();
-
-       return this.getSmscMapping(countryId);
+       return this.http.delete(url)
+      .catch(this.handleError);      
     
   }
 
-
-  updateGateWay(gatewayNumbersId, routingKey, isEnabled){
-    
-    routingKey = (routingKey==null||routingKey=='')?0:routingKey;
-
+  addKannel(kannel ) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-      let url = `${this.baseUrl}addgatewaynumber/update?gatewayNumbersId=${gatewayNumbersId}&routingKey=${routingKey}&isEnabled=${isEnabled}`;
-      console.log(url);
+    let url = `${this.baseUrl}kannel/addSetting`;
 
-//update?gatewayNumbersId=206&routingKey=http://app7.dev1.whispir.net:8080/KannelEntrance?&isEnabled=false
+    console.log(url +" , DATA :" +JSON.stringify(kannel));
 
-     return this.http.post(url,JSON.stringify(gatewayNumbersId,routingKey,isEnabled), {headers: headers})
+    return this.http.post(url,JSON.stringify(kannel), {headers: headers})
       .map(this.extractData)
       .catch(this.handleError);
-    
+
+    }
   
+
+ updateKannel(kannel) {
+    
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    if (kannel) {
+      let url = `${this.baseUrl}kannel/updateKannel`;
+      console.log(url);
+     // console.log(userUpdate.userDetailsId);
+
+      return this.http.put(url,JSON.stringify(kannel), {headers: headers})
+        .map(this.extractData)
+      .catch(this.handleError);
+
+      // this.router.navigate(['/user-logs']);
+
+    }
   }
 
-  deleteGateWay(gatewayNumbersId){
-     let headers = new Headers();
+  addBind(bind) {
+    let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-      let url = `${this.baseUrl}addgatewaynumber/delete?gatewayNumbersId=${gatewayNumbersId}`;
+    if (bind) {
+      let url = `${this.baseUrl}kannel/addBinding`;
       console.log(url);
 
-//update?gatewayNumbersId=206&routingKey=http://app7.dev1.whispir.net:8080/KannelEntrance?&isEnabled=false
-
-     return this.http.post(url,{headers: headers})
+     return this.http.post(url,JSON.stringify(bind), {headers: headers})
       .map(this.extractData)
       .catch(this.handleError);
+    }
   }
 
-  // getAllActivityLogs() {
-  //   let url;
-  //   url = `${this.baseUrl}logs/getAllLogs`;
+  updateBind(bind) {
     
-  //   console.log(url);
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    if (bind) {
+      let url = `${this.baseUrl}kannel/updateBind`;
+      console.log(url);
+     // console.log(userUpdate.userDetailsId);
 
-  //   return this.http.get(url)
-  //     .map(this.extractData)
-  //     .catch(this.handleError);
-  // }
 
-  // getDetailsByUserName(username: number) {
-  //   if (username) {
-  //     let url = `${this.getUserDetailsEndPoint}${username}`;
-  //     console.log(url);
+      return this.http.put(url,JSON.stringify(bind), {headers: headers})
+        .map(this.extractData)
+      .catch(this.handleError);
 
-  //     return this.http.get(url)
-  //       .map((res: Response) => res.json())
-  //       .catch(this.handleError);
-  //   }
-  // }
+      // this.router.navigate(['/user-logs']);
 
-  // deleteUser(username: number) {
-  //   if (username) {
-  //     let url = `${this.getUserDetailsEndPoint}${username}`;
-  //     console.log(url);
+    }
+  }
 
-  //      this.http.delete(url)
-  //     .catch(this.handleError).subscribe();
-
-  //      return this.getAllUsers();
-  //   }
-  // }
-
-  // updateUser(userUpdate: User) {
-    
-  //   let headers = new Headers();
-  //   headers.append('Content-Type', 'application/json');
-  //   if (userUpdate) {
-  //     let url = `${this.getUserDetailsEndPoint}${userUpdate.userDetailsId}`;
-  //     console.log(url);
-  //    // console.log(userUpdate.userDetailsId);
-
-  //     return this.http.put(url,JSON.stringify(userUpdate), {headers: headers})
-  //       .map(this.extractData)
-  //     .catch(this.handleError);
-
-  //     // this.router.navigate(['/user-logs']);
-
-  //   }
-  // }
-
- 
   private extractData(res: Response) {
     let body = res.json();
     return body || {};
@@ -214,5 +165,6 @@ addSmscMapping(smscForm, countryId) {
     console.error(errMsg);
     return Observable.throw(errMsg);
   }
+
 
 }

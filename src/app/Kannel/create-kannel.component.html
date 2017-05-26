@@ -1,0 +1,154 @@
+<div class="row">
+<div class="col-xs-5">
+</div>
+<div class="col-xs-4">
+        <h1>
+            Add New Kannel
+        </h1>
+</div>
+</div>        
+<div class="row">
+
+
+
+<div class="col-xs-4">
+    <h1>
+    </h1>
+</div>
+
+<div class="container col-xs-4">
+    
+        
+    <p></p>
+    
+
+    <form class="form-horizontal"  [formGroup]="kannelForm" >
+    
+        
+             
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="inputFirstName">Kannel Server:</label>
+
+            <div  class="col-sm-5">
+                <input  name="inputFirstName"  class="form-control"   formControlName="server" placeholder="Kannel Server"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="inputLastName">Kannel URL:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="url" class="form-control"  formControlName="kannelUrl" placeholder="Kannel URL"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="kannelUsername">Kannel User name:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="kannelUsername" class="form-control"  formControlName="kannelUsername" placeholder="User name"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="kannelPassword">Kannel Password:</label>
+
+            <div  class="col-sm-5">
+                <input type="text"  name="kannelPassword" class="form-control"  formControlName="kannelPassword" placeholder="Password"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="fromAddress">From Address:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="fromAddress" class="form-control"  formControlName="fromAddress" placeholder="Kannel fromAddress"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="poolMin">Minimum Pool size:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="poolMin" class="form-control"  formControlName="poolMin" placeholder="poolMin"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="poolMax">Maximum Pool size:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="poolMax" class="form-control"  formControlName="poolMax" placeholder="poolMax"/>
+                
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="monitorUrl">Monitor URL:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="monitorUrl" class="form-control"  formControlName="monitorUrl" placeholder="Monitor Url"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="monitorUsername">Monitor User name:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="monitorUserName" class="form-control"  formControlName="monitorUsername" placeholder="Monitor User name"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="monitorPassword">Monitor Password:</label>
+
+            <div  class="col-sm-5">
+                <input type="text"  name="monitorPassword" class="form-control"  formControlName="monitorPassword" placeholder="Password"/>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="smppReplyRout">SMPP Reply Rout:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="smppReplyRout" class="form-control"  formControlName="smppReplyRout" placeholder="smppReplyRout"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="smppDeliveryReceiptUrl">SMPP Delivery Receipt URL:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="smppDeliveryReceiptUrl" class="form-control"  formControlName="smppDeliveryReceiptUrl" placeholder="smppDeliveryReceiptUrl"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="smsReplyRoute">SMS Reply Route:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="smsReplyRoute" class="form-control"  formControlName="smsReplyRoute" placeholder="smsReplyRoute"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="smsDeliveryReceiptUrl">SMS Delivery Receipt URL:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="smsDeliveryReceiptUrl" class="form-control"  formControlName="smsDeliveryReceiptUrl" placeholder="smsDeliveryReceiptUrl"/>
+            </div>
+        </div>
+         <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="deliveryUrl">Delivery URL:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="deliveryUrl" class="form-control"  formControlName="deliveryUrl" placeholder="deliveryUrl"/>
+            </div>
+        </div>         
+        <div>
+            <input type="hidden" hidden name="kannelSettingsId" class="form-control"  formControlName="kannelSettingsId" placeholder="kannelSettingsId"> 
+        </div>
+        
+        <div class="form-group">
+            <div  class="col-sm-3"></div>
+            <div class="controls col-sm-5">
+                <button (click)="addKannel(kannelForm.value)" class="btn btn-small btn-primary">Add </button>
+                <button (click)="cancel()" class="btn-cancel">Cancel</button>                
+            </div>
+        </div>
+        
+    </form>
+</div>
+</div>

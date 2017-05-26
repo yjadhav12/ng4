@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { ListUsersService } from '../list-users.service';
-import {   Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+
 
 
 @Component({
@@ -22,7 +23,8 @@ export class ListUsersComponent implements OnInit {
   constructor(
     private listUsersService: ListUsersService,
     //private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   
     
     
@@ -36,7 +38,7 @@ export class ListUsersComponent implements OnInit {
   editUser(userDetailsId : number){
     console.log("EditUser"+userDetailsId);
 
-    this.router.navigate(['./editUser', userDetailsId]);
+    this.router.navigate(['../editUser', userDetailsId], { relativeTo: this.route });
   }
 
   deleteUser(userDetailsId : number){

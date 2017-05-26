@@ -49,7 +49,7 @@ export class CreateUserComponent implements OnInit {
      this.userForm = this._fb.group({
             firstName: ['', [<any>Validators.required, <any>Validators.minLength(1)]],
             lastName:['', [<any>Validators.required, <any>Validators.minLength(1)]],
-            userName:['', [<any>Validators.required, <any>Validators.minLength(1)]],
+            userName:['', [<any>Validators.required, <any>Validators.minLength(0)]],
             password:['', [<any>Validators.required, <any>Validators.minLength(1)]],
             confirmPassword:['', [<any>Validators.required, <any>Validators.minLength(1)]],
             emailId:['', [<any>Validators.required, <any>Validators.minLength(1)]],
@@ -79,13 +79,13 @@ export class CreateUserComponent implements OnInit {
    console.log("updating user"+user.firstName);
     this.listUsersService.addUser(user)
     .subscribe((response) => {
-      this.router.navigate(['/users-list']);
+      this.router.navigate(['adminPage/users-list']);
     }
     );
     
   }
 cancel(){
-    this.router.navigate(['/users-list']);
+    this.router.navigate(['adminPage/users-list']);
   }
   getDetails(username: number) {
     this.listUsersService.getDetailsByUserName(username).subscribe(

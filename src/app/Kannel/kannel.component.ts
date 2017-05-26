@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ChangeDetectionStrategy, ChangeDetectorRef  }
 import { KannelService } from './kannel.service';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { User } from '../users-mgmt/user.interface';
+import { Kannel } from './kannel.interface';
 
 
 import 'rxjs/add/operator/switchMap';
@@ -19,10 +19,10 @@ export class KannelComponent implements OnInit {
 
   public userForm: FormGroup;
   public submitted: boolean;
-  results : any[]= [];
+  kannelList;
   public events: any[] = [];
 
-  user: User; // This will hold the data coming from the service
+  //user: User; // This will hold the data coming from the service
   selected: boolean = false; // Flag to check if a user is clicked or not
   selectedUser: any; // presently Selected user details
   error_text: string = ""; // So called error reporing text to the end user
@@ -45,7 +45,9 @@ export class KannelComponent implements OnInit {
 
  
   ngOnInit() {
-    console.log("In CreateUserComponent");
+    console.log("In KannelComponent");
+    this.getAllKannelSettings();
+
      this.userForm = this._fb.group({
             firstName: ['', [<any>Validators.required, <any>Validators.minLength(1)]],
             lastName:['', [<any>Validators.required, <any>Validators.minLength(1)]],
@@ -67,14 +69,47 @@ export class KannelComponent implements OnInit {
         myFormStatusChanges$.subscribe(x => this.events.push({ event: 'STATUS_CHANGED', object: x }));
         myFormValueChanges$.subscribe(x => this.events.push({ event: 'VALUE_CHANGED', object: x }));
     }
+
+    getAllKannelSettings(){
+      this.selected = false;
+    this.error_text = "";
+         
+      this.kannelService.getAllKannelSettings().subscribe(
+        response => {
+          this.kannelList = response;
+          console.log(response[0].server);
+          console.log(this.kannelList[0].server);
+        },
+        error => {
+          this.kannelList = [];
+          this.error_text = "Sorry! No Users found. Try again";
+          console.error(error);
+        }
+      )
+
+    }
  
- createUser2(user: User, isValid : boolean) {
-   console.log("updating user1");
-   console.log("updating user"+user+" is Valid:");
-   console.log(user);
+ viewAllBinds(kannelSettingsId){
+  console.log("view binds for : "+kannelSettingsId);
+
+  this.router.navigate(['../viewBinds', kannelSettingsId], { relativeTo: this.route });
+  
  }
 
+ updateKannel(kannelSettingsId){
+  console.log("update kannel for : "+kannelSettingsId);
 
+  this.router.navigate(['../updateKannel', kannelSettingsId], { relativeTo: this.route });
+  
+ }
+
+addNewKannel(){
+  this.router.navigate(['../addKannel'], { relativeTo: this.route });
+}
+
+addNewBind(){
+  this.router.navigate(['../addBind'], { relativeTo: this.route });
+}
   // createUser(user: User) {
   //  console.log("updating user"+user.firstName);
   //   this..addUser(user)
@@ -86,7 +121,7 @@ export class KannelComponent implements OnInit {
   // }
 
 cancel(){
-    this.router.navigate(['/users-list']);
+    this.router.navigate(['adminPage/kannel']);
   }
 
 //   getDetails(username: number) {

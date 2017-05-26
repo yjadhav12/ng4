@@ -1,0 +1,111 @@
+<div class="row">
+<div class="col-xs-5">
+</div>
+<div class="col-xs-4">
+        <h1>
+            Add New Bind
+        </h1>
+</div>
+</div>        
+<div class="row">
+
+
+
+<div class="col-xs-4">
+    <h1>
+    </h1>
+</div>
+
+<div class="container col-xs-4">
+    
+        
+    <p></p>
+    <div class="margin-20">
+          <div>myForm details:-</div>
+          
+          <pre>form value: <br>{{bindForm.value | json}}</pre>
+        </div>
+
+    <form class="form-horizontal"  [formGroup]="bindForm" >
+             
+         <!--<div class="form-group"  [formGroup]="kannelSettings">    -->
+         <fieldset class="form-group" formGroupName="kannelSettings">
+             <label  class="control-label  col-sm-3"   for="kannelSettingsId">Select Kannel</label>
+
+                <div class="selectContainer col-sm-5">
+            
+                <select formControlName="kannelSettingsId" name="kannelSettingsId" class="form-control">
+                    <!--<option [ngValue]="country">Select a country </option>-->
+                    <option *ngFor="let kannel of kannelList" [ngValue]="kannel.kannelSettingsId" >{{ kannel.server }}</option>              
+                </select>
+
+                </div>
+         </fieldset>
+         <!--</div>-->
+
+
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="defaultRoute">Default Route:</label>
+
+            <div  class="col-sm-5">
+                
+                <input formControlName="defaultRoute" 
+                     type="checkbox"  name="defaultRoute">
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="networkName">Netwrok Name:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="networkName" class="form-control" formControlName="networkName" placeholder="Netwrok Name"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="host">Host:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="host" class="form-control"  formControlName="host" placeholder="Host"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="userName">User Name:</label>
+
+            <div  class="col-sm-5">
+                <input type="text"  name="userName" class="form-control" formControlName="userName" placeholder="User Name"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="password">Password:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="password" class="form-control"  formControlName="password" placeholder="Password"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="noRpNumber">No Reply Number:</label>
+
+            <div  class="col-sm-5">
+                <input type="number" name="noRpNumber" class="form-control"  formControlName="noRpNumber" placeholder="No Reply Number"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="bindonshore">Bind On Shore:</label>
+
+            <div  class="col-sm-5">
+                <input formControlName="bindonshore" 
+                     type="checkbox"  name="bindonshore">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div  class="col-sm-3"></div>
+            <div class="controls col-sm-5">
+                <button (click)="addBind(bindForm.value)" class="btn btn-small btn-primary">Add </button>
+                <button (click)="cancel()" class="btn-cancel">Cancel</button>                
+            </div>
+        </div>
+        
+    </form>
+</div>
+</div>

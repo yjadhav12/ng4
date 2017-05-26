@@ -43,14 +43,14 @@ export class UserDetailsComponent implements OnInit {
       //.subscribe((selectedUser: User) => this.hero = hero);
   }
   cancel(){
-    this.router.navigate(['/users-list']);
+    this.router.navigate(['adminPage/users-list']);
   }
   updateUser(user: User) {
    console.log("updating user"+user.firstName);
     this.listUsersService.updateUser(user)
     .subscribe((response) => {
       //DO SOMETHING, THEN ----
-      this.router.navigate(['/homePage/users-list']);
+      this.router.navigate(['adminPage/users-list']);
     }
     );
     

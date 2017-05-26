@@ -1,0 +1,153 @@
+<div class="row">
+<div class="col-xs-5">
+</div>
+<div class="col-xs-4">
+        <h1>
+            Edit Kannel
+        </h1>
+</div>
+</div>        
+<div class="row">
+
+
+
+<div class="col-xs-4">
+    <h1>
+    </h1>
+</div>
+
+<div class="container col-xs-4">
+    
+        
+    <p></p>
+    
+
+    <form class="form-horizontal" >
+    
+        <div *ngIf="kannel">
+             
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="inputFirstName">Kannel Server:</label>
+
+            <div  class="col-sm-5">
+                <input  name="inputFirstName"  class="form-control" [(ngModel)]="kannel.server" placeholder="Kannel Server"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="inputLastName">Kannel URL:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="url" class="form-control" [(ngModel)]="kannel.kannelUrl" placeholder="Kannel URL"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="userName">Kannel User name:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="userName" class="form-control" [(ngModel)]="kannel.kannelUsername" placeholder="User name"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="password">Kannel Password:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" disabled="true" name="password" class="form-control" [(ngModel)]="kannel.kannelPassword" placeholder="Password"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="inputLastName">From Address:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="fromAddress" class="form-control" [(ngModel)]="kannel.fromAddress" placeholder="Kannel fromAddress"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="userName">Minimum Pool size:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="poolMin" class="form-control" [(ngModel)]="kannel.poolMin" placeholder="poolMin"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="password">Maximum Pool size:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="poolMax" class="form-control" [(ngModel)]="kannel.poolMax" placeholder="poolMax"/>
+                
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="monitorUrl">Monitor URL:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="monitorUrl" class="form-control" [(ngModel)]="kannel.monitorUrl" placeholder="Monitor Url"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="userName">Monitor User name:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="monitorUserName" class="form-control" [(ngModel)]="kannel.monitorUsername" placeholder="Monitor User name"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="password">Monitor Password:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" disabled="true" name="monitorPassword" class="form-control" [(ngModel)]="kannel.monitorPassword" placeholder="Password"/>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="emailId">SMPP Reply Rout:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="smppReplyRout" class="form-control" [(ngModel)]="kannel.smppReplyRout" placeholder="smppReplyRout"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="role">SMPP Delivery Receipt URL:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="smppDeliveryReceiptUrl" class="form-control" [(ngModel)]="kannel.smppDeliveryReceiptUrl" placeholder="smppDeliveryReceiptUrl"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="role">SMS Reply Route:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="smsReplyRoute" class="form-control" [(ngModel)]="kannel.smsReplyRoute" placeholder="smsReplyRoute"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="role">SMS Delivery Receipt URL:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="smsDeliveryReceiptUrl" class="form-control" [(ngModel)]="kannel.smsDeliveryReceiptUrl" placeholder="smsDeliveryReceiptUrl"/>
+            </div>
+        </div>
+         <div class="form-group">
+            <label  class="control-label  col-sm-3"   for="role">Delivery URL:</label>
+
+            <div  class="col-sm-5">
+                <input type="text" name="deliveryUrl" class="form-control" [(ngModel)]="kannel.deliveryUrl" placeholder="deliveryUrl"/>
+            </div>
+        </div>         
+        <div>
+            <input type="hidden" hidden name="kannelSettingsId" class="form-control" [(ngModel)]="kannel.kannelSettingsId" placeholder="userDetailsId"> 
+        </div>
+        <div class="form-group">
+            <div  class="col-sm-3"></div>
+            <div class="controls col-sm-5">
+                <button (click)="updateKannel(kannel)" class="btn btn-small btn-primary">Update </button>
+                <button (click)="cancel()" class="btn-cancel">Cancel</button>                
+            </div>
+        </div>
+        </div>
+    </form>
+</div>
+</div>
