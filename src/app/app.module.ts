@@ -10,6 +10,7 @@ import { SelectFormExample } from './select-form-example';
 import { AppComponent } from './app.component';
 import { ListUsersComponent } from './users-mgmt/list-users.component';
 import { GatewayNumbersComponent } from './msgHub/gatewayNumbers.component';
+import { KannelComponent } from './kannel/kannel.component';
 
 
 import { UserDetailsComponent } from './users-mgmt/user-details.component';
@@ -23,6 +24,7 @@ import {ListUsersService} from './list-users.service';
 import {CountrySmscService} from './msgHub/country-smsc.service';
 import {GatewayNumbersService} from './msgHub/gatewayNumbers-smsc.service';
 import { PagerService } from './pagination.service';
+import {KannelService} from './kannel/kannel.service';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MdSelectModule} from '@angular/material';
@@ -51,6 +53,8 @@ const appRoutes: Routes = [
    { path: 'deleteUser/:id', component: UserDetailsComponent },
    { path: 'user-creation', component: CreateUserComponent },
    { path: 'user-logs', component: ActivityLogComponent },
+   { path: 'kannel', component: KannelComponent },
+   
   { path: 'homePage', component: MsgHubAppComponent, 
      children: [
       {
@@ -60,7 +64,8 @@ const appRoutes: Routes = [
           { path: 'gatewayNumbers', component: GatewayNumbersComponent },
           { path: 'deleteUser/:id', component: UserDetailsComponent },
           { path: 'user-creation', component: CreateUserComponent },
-          { path: 'user-logs', component: ActivityLogComponent }
+          { path: 'user-logs', component: ActivityLogComponent },
+          { path: 'kannel', component: KannelComponent },
         ]
   }]},
   { path: 'adminPage', component: AdminHubAppComponent,
@@ -111,6 +116,7 @@ const appRoutes: Routes = [
     AdminHubAppComponent,
     CountryAppComponent,
     GatewayNumbersComponent,
+    KannelComponent,
 
     FilteredList,
     FilterPipe ,
@@ -130,7 +136,7 @@ const appRoutes: Routes = [
     ,RouterModule.forRoot(appRoutes)
   ],
   
-  providers: [ListUsersService,CountrySmscService, GatewayNumbersService, PagerService, { provide: ErrorHandler, useClass: AppErrorHandler } ],
+  providers: [ListUsersService,CountrySmscService, GatewayNumbersService, PagerService, KannelService, { provide: ErrorHandler, useClass: AppErrorHandler } ],
   bootstrap: [AppComponent],
   entryComponents: [MsgHubAppComponent, AdminHubAppComponent]
 })

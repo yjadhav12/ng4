@@ -10,8 +10,8 @@ import 'rxjs/add/operator/switchMap';
 @Component({
   moduleId: module.id,
   selector: 'create-user', 
-  templateUrl: './create-user.component.html',
-  styleUrls: ['./list-users.component.css']
+  templateUrl: './kannel.component.html',
+  styleUrls: ['../users-mgmt/list-users.component.css']
 })
 export class KannelComponent implements OnInit {
   place: string;
@@ -75,28 +75,31 @@ export class KannelComponent implements OnInit {
  }
 
 
-  createUser(user: User) {
-   console.log("updating user"+user.firstName);
-    this.listUsersService.addUser(user)
-    .subscribe((response) => {
-      this.router.navigate(['/users-list']);
-    }
-    );
+  // createUser(user: User) {
+  //  console.log("updating user"+user.firstName);
+  //   this..addUser(user)
+  //   .subscribe((response) => {
+  //     this.router.navigate(['/users-list']);
+  //   }
+  //   );
     
-  }
+  // }
+
 cancel(){
     this.router.navigate(['/users-list']);
   }
-  getDetails(username: number) {
-    this.listUsersService.getDetailsByUserName(username).subscribe(
-      userDetails => {
-        this.selectedUser = userDetails;
-        this.selected = true;
-      },
-      error => {
-        this.selected = false;
-        console.error(error);
-      }
-    )
-}
+
+//   getDetails(username: number) {
+//     this.listUsersService.getDetailsByUserName(username).subscribe(
+//       userDetails => {
+//         this.selectedUser = userDetails;
+//         this.selected = true;
+//       },
+//       error => {
+//         this.selected = false;
+//         console.error(error);
+//       }
+//     )
+// }
+
 }

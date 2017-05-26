@@ -3,11 +3,11 @@
 </div>
 <div class="container col-xs-4">
     <h1>
-        Create User
+        New Bind Setup
     </h1>
     <form [formGroup]="userForm" novalidate (ngSubmit)="createUser2(userForm.value, userForm.valid)"  >
         <div class="form-group">
-            <label class=" " >User name:</label>
+            <label class=" " >Default Route:</label>
               
             <div class="">
                 <input type="text" class="form-control" formControlName="userName"> 
@@ -18,7 +18,7 @@
         </div>
        
         <div class="form-group">
-            <label class=" " >Password:</label>
+            <label class=" " >Network Name:</label>
               
             <div class="">
                 <input type="text" class="form-control" formControlName="password"> 
@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class=" " >Confirm Password:</label>
+            <label class=" " >Host:</label>
               
             <div class="">
                 <input type="text" class="form-control" formControlName="confirmPassword"> 
@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class=" " >First name:</label>
+            <label class=" " >User name:</label>
               
             <div class="">
                 <input type="text" class="form-control" formControlName="firstName"> 
@@ -49,7 +49,7 @@
         </div>
 
         <div class="form-group">
-            <label class=" " >Last name:</label>
+            <label class=" " >Password:</label>
               
             <div class="">
                 <input type="text" class="form-control" formControlName="lastName"> 
@@ -59,7 +59,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class=" " >Email:</label>
+            <label class=" " >No Reply Number:</label>
               
             <div class="">
                 <input type="text" class="form-control" formControlName="emailId"> 
@@ -69,7 +69,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class=" " >User Role:</label>
+            <label class=" " >AWS on Shore Bind:</label>
               
             <div class="">
                 <input type="text" class="form-control" formControlName="role"> 
@@ -80,7 +80,7 @@
         </div>
         <div class="form-group">
             <div class="controls">
-                <button (click)="createUser(userForm.value, userForm.valid)" class="btn  btn-primary">Create User</button>
+                <button (click)="createUser(userForm.value, userForm.valid)" class="btn  btn-primary">Submit</button>
                 <button (click)="cancel()" class=" btn-small btn-cancel">Cancel</button>
                 
             </div>
