@@ -66,6 +66,10 @@ export class KannelBindListComponent implements OnInit {
     
   }
 
+  addNewBind(){
+  this.router.navigate(['adminPage/addBind']);
+}
+
 getAllBindsByKannel(kannelSettingsId){
 
   this.kannelService.getAllBindsForKannelId(kannelSettingsId).subscribe(

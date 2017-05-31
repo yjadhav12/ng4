@@ -6,6 +6,10 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 
 import 'rxjs/add/operator/switchMap';
 
+export class BindForm {
+  id:any;
+}
+
 @Component({
   selector: 'update-bind', 
   templateUrl: './bind-details.component.html',
@@ -16,18 +20,28 @@ export class BindDetailsComponent implements OnInit {
   language: string;
   public userForm: FormGroup;
 
-
+  bindForm : BindForm;
   results : any[]= [];
   bind;
   selected: boolean = false; // Flag to check if a user is clicked or not
   selectedUser: any; // presently Selected user details
   error_text: string = ""; // So called error reporing text to the end user
   kannelList : any[] = []; 
-  kannelSettingsId;
+  
+  list: [boolean,string][];
   constructor(private kannelService : KannelService,
   private _fb: FormBuilder,
   private route: ActivatedRoute,
-  private router: Router) {}
+  private router: Router) {
+this.list = [
+          
+          [false, "Apple"],
+          [false, "Banana"], 
+          [false, "Grapes"],
+          [true, "Mango"]
+        ];
+
+  }
   ngOnInit() {
     console.log("In BindDetailsComponent");
     // (+) converts string 'id' to a number
@@ -36,6 +50,8 @@ export class BindDetailsComponent implements OnInit {
     this.route.params     
       .switchMap((params: Params) => this.kannelService.getBind(+params['id'])).subscribe(
         res => {
+          console.log(res.kannelSettings.kannelSettingsId);
+          
           this.bind = res;
         },
         error => {
@@ -50,7 +66,8 @@ export class BindDetailsComponent implements OnInit {
   }
   
   updateBind(bind) {
-   console.log("updating bind :"+bind.networkname);
+   // bind.kannelSettings.kannelSettingsId = this.kannelSettingsId ;
+   console.log("updating bind :"+bind.kannelSettings.kannelSettingsId +" with ");
     this.kannelService.updateBind(bind)
     .subscribe((response) => {
       //DO SOMETHING, THEN ----
@@ -59,7 +76,10 @@ export class BindDetailsComponent implements OnInit {
     );
     
   }
-
+trackByIdx(index: number, obj: any): any {
+  console.log("index:"+index+" , Obj: "+obj);
+        return index;
+    }
 getAllKannelSettings(){
       this.selected = false;
     this.error_text = "";

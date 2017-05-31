@@ -66,14 +66,14 @@
             <label  class="control-label  col-sm-3"   for="poolMin">Minimum Pool size:</label>
 
             <div  class="col-sm-5">
-                <input type="text" name="poolMin" class="form-control"  formControlName="poolMin" placeholder="poolMin"/>
+                <input type="number" name="poolMin" class="form-control"  formControlName="poolMin" placeholder="poolMin"/>
             </div>
         </div>
         <div class="form-group">
             <label  class="control-label  col-sm-3"   for="poolMax">Maximum Pool size:</label>
 
             <div  class="col-sm-5">
-                <input type="text" name="poolMax" class="form-control"  formControlName="poolMax" placeholder="poolMax"/>
+                <input type="number" name="poolMax" class="form-control"  formControlName="poolMax" placeholder="poolMax"/>
                 
             </div>
         </div>
@@ -144,7 +144,7 @@
         <div class="form-group">
             <div  class="col-sm-3"></div>
             <div class="controls col-sm-5">
-                <button (click)="addKannel(kannelForm.value)" class="btn btn-small btn-primary">Add </button>
+                <button (click)="addKannel(kannelForm.value)" [disabled]="!kannelForm.valid" class="btn btn-small btn-primary">Add </button>
                 <button (click)="cancel()" class="btn-cancel">Cancel</button>                
             </div>
         </div>

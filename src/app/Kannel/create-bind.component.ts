@@ -21,6 +21,7 @@ export class CreateBindComponent implements OnInit {
   //kannel : Kannel;
   kannel : any;
   kannelList : any[] = []; 
+  viewKannelId : any;
   selected: boolean = false; // Flag to check if a user is clicked or not
   selectedUser: any; // presently Selected user details
   error_text: string = ""; // So called error reporing text to the end user
@@ -29,12 +30,13 @@ export class CreateBindComponent implements OnInit {
   private _fb: FormBuilder,
   private route: ActivatedRoute,
   private router: Router) {}
+  
   ngOnInit() {
   console.log("In CreateBindComponent");
   this.getAllKannelSettings();
   this.bindForm = this._fb.group({
            // kannelSettingsId: ['', [<any>Validators.required, <any>Validators.minLength(1)]],
-            defaultRoute:  ['', [<any>Validators.required, <any>Validators.minLength(1)]],
+            defaultRoute: ['', []],
             networkName:['', [<any>Validators.required, <any>Validators.minLength(1)]],
             host:['', [<any>Validators.required, <any>Validators.minLength(1)]],
             userName:['', [<any>Validators.required, <any>Validators.minLength(1)]],
@@ -48,7 +50,9 @@ export class CreateBindComponent implements OnInit {
     
   }
   cancel(){
-    this.router.navigate(['adminPage/kannel']);
+    //this.router.navigate([`adminPage/kannel`]);
+    console.log("In Cancel");
+    this.router.navigate([`adminPage/kannel`]);
   }
   
   getAllKannelSettings(){
@@ -73,11 +77,7 @@ export class CreateBindComponent implements OnInit {
     }
 
   addBind(bind) {
-   console.log("Adding Bind :"+bind.kannelSettings.kannelSettingsId);
-    
-   //let url = `${this.baseUrl}kannel/deleteBind/${bind.kannelSettingsId}`;
-
-  console.log("Bind : "+JSON.stringify(bind));
+    this.viewKannelId = bind.kannelSettings.kannelSettingsId;
     this.kannelService.addBind(bind)
     .subscribe((response) => {
       console.log("Call went through");

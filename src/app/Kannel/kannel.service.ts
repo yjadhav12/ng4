@@ -135,7 +135,7 @@ export class KannelService {
     if (bind) {
       let url = `${this.baseUrl}kannel/updateBind`;
       console.log(url);
-     // console.log(userUpdate.userDetailsId);
+      console.log(JSON.stringify(bind));
 
 
       return this.http.put(url,JSON.stringify(bind), {headers: headers})

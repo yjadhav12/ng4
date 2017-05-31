@@ -14,7 +14,7 @@ import 'rxjs/add/operator/switchMap';
 export class KannelDetailsComponent implements OnInit {
   place: string;
   language: string;
-  public userForm: FormGroup;
+  public kannelForm: FormGroup;
   results : any[]= [];
   kannel;
   selected: boolean = false; // Flag to check if a user is clicked or not
@@ -28,11 +28,30 @@ export class KannelDetailsComponent implements OnInit {
   ngOnInit() {
     console.log("In KannelDetailsComponent");
     // (+) converts string 'id' to a number
+     this.kannelForm = this._fb.group({
+            server: ['', [<any>Validators.required, <any>Validators.minLength(1)]],
+            kannelUrl:['', [<any>Validators.required, <any>Validators.minLength(1)]],
+            kannelUsername:['', [<any>Validators.required, <any>Validators.minLength(1)]],
+            kannelPassword:['', [<any>Validators.required, <any>Validators.minLength(1)]],
+            fromAddress:['', []],
+            poolMin:['', [<any>Validators.required, <any>Validators.minLength(1)]],
+            poolMax:['', [<any>Validators.required, <any>Validators.minLength(1)]],
+            monitorUrl:['', [<any>Validators.required, <any>Validators.minLength(1)]],
+            monitorUsername:['', [<any>Validators.required, <any>Validators.minLength(1)]],
+            monitorPassword:['', [<any>Validators.required, <any>Validators.minLength(1)]],
+            smppReplyRout:['', []],
+            smppDeliveryReceiptUrl:['', []],
+            smsReplyRoute:['', []],
+            smsDeliveryReceiptUrl:['', []],
+            deliveryUrl:['', []],
+            kannelSettingsId:['', []]
+        });
     this.route.params     
       //.switchMap((params: Params) => this.kannelService.getAllBindsForKannelId(+params['id'])).subscribe(
         .switchMap((params: Params) => this.kannelService.getKannelSetting(+params['id'])).subscribe(
         res => {
           this.kannel = res;
+          this.kannelForm = res;
         },
         error => {
           
